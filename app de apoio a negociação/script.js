@@ -42,9 +42,9 @@ function calcularTTCDesejado() {
   const ttvTTCDesejado = parseFloat(document.getElementById('precoVendaUnitarioMarkup').value);
   const markupTTCDesejado = parseFloat(document.getElementById('markupTTC').value);
 
-  if (isNaN(ttvTTCDesejado) || isNaN(markupTTCDesejado) || markupTTCDesejado < 0) {
-      alert('Por favor, insira números válidos. O markup deve ser uma porcentagem positiva.');
-      return;
+  if (isNaN(ttv) || isNaN(markup)) {
+    alert('Por favor, insira números válidos.');
+    return;
   }
 
   const markupDecimalTTCDesejado = markupTTCDesejado / 100;
