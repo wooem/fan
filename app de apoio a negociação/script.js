@@ -39,16 +39,11 @@ function calcularMarkup() {
 }
 
 function calcularTTCDesejado() {
-  const ttvTTCDesejado = parseFloat(document.getElementById('precoVendaUnitarioMarkup').value);
-  const markupTTCDesejado = parseFloat(document.getElementById('markupTTC').value);
+  const ttv = parseFloat(document.getElementById('precoVendaUnitarioTTCDesejado').value);
+  const markup = parseFloat(document.getElementById('markupTTC').value);
 
-  if (isNaN(ttv) || isNaN(markup)) {
-    alert('Por favor, insira números válidos.');
-    return;
-  }
-
-  const markupDecimalTTCDesejado = markupTTCDesejado / 100;
-  const ttcDesejado = ttvTTCDesejado * (1 + markupDecimalTTCDesejado);
+  const markupDecimal = markup / 100;
+  const ttcDesejado = ttv * (1 + markupDecimal);
 
   const resultTTCDesejado = document.getElementById('resultTTCDesejado');
   resultTTCDesejado.innerText = `TTC Desejado: R$${ttcDesejado.toFixed(2)}`;
