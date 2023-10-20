@@ -1,4 +1,4 @@
-95% de armazenamento usado … Caso atinja o limite de armazenamento, não será possível criar, editar ou fazer upload de arquivos. Aproveite 100 GB de armazenamento por R$ 6,99 R$ 1,69 por mês, durante 3 meses.
+
 function calcularMargem() {
   const precoCompra = parseFloat(document.getElementById('precoCompra').value);
   const precoVendaUnitario = parseFloat(document.getElementById('precoVendaUnitario').value);
