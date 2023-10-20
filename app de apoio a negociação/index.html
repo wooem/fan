@@ -37,8 +37,8 @@
         <input type="number" id="precoVendaUnitario" placeholder="TTC">
     </div>
     <div class="input-group">
-        <label for="quantidade">Quantidade:</label>
-        <input type="number" id="quantidade" placeholder="Quantidade">
+        <label for="quantidade">Quantidade de Unidades:</label>
+        <input type="number" id="quantidade" placeholder="Quantidade de Unidades">
     </div>
     <button onclick="calcularMargem()">Calcular Margem</button>
     <div class="result-box">
@@ -88,15 +88,15 @@
             <h2>Conversor de Hectolitragem</h2>
             <div class="input-group">
                 <label for="litros">Mililitros por Unidade (mL):</label>
-                <input type="number" id="litros">
+                <input type="number" id="litros" placeholder="Valor em mL">
             </div>
             <div class="input-group">
                 <label for="unidadesPorCaixa">Unidades por Caixa:</label>
-                <input type="number" id="unidadesPorCaixa">
+                <input type="number" id="unidadesPorCaixa" placeholder="Quantidade de unidades por caixa">
             </div>
             <div class="input-group">
                 <label for="caixas">Quantidade de Caixas:</label>
-                <input type="number" id="caixas">
+                <input type="number" id="caixas" placeholder="Quantidade de caixas">
             </div>
             <button onclick="converterParaHectolitros()">Converter para Hectolitros</button>
             <div class="result-box">
@@ -110,15 +110,16 @@
                 <h2>Conversor de Hectolitros para Quantidade de Caixas</h2>
                 <div class="input-group">
                     <label for="hectolitros">Hectolitros (hL):</label>
-                    <input type="number" id="hectolitros">
+                    <input type="number" id="hectolitros" placeholder="Valor em hL">
+            
                 </div>
                 <div class="input-group">
                     <label for="mlunidade">Mililitros por Unidade (mL):</label>
-                    <input type="number" id="mlunidade">
+                    <input type="number" id="mlunidade" placeholder="Valor em mL">
                 </div>
                 <div class="input-group">
                     <label for="unidadesPorCaixaReverse">Unidades por Caixa:</label>
-                    <input type="number" id="unidadesPorCaixaReverse">
+                    <input type="number" id="unidadesPorCaixaReverse" placeholder="Quantidade de unidades por caixa">
                 </div>
                 <button onclick="calcularQuantidadeCaixas()">Converter para Caixas</button>
                 <div class="result-box">
@@ -130,34 +131,27 @@
             <section id="calculadoraRotaEfetiva" class="calculadora hidden">
                 <h2>Calculadora de Rota Efetiva</h2>
                 <form id="calcForm">
-                    <label for="rePercentage">Porcentagem de RE desejada (%):</label>
-                    <input type="number" id="rePercentage" required><br><br>
+                    <label for="porcentagemRE">Porcentagem de RE desejada (%):</label>
+                    <input type="number" id="porcentagemRE" placeholder="Insira o valor da porcentagem de RE desejada (%)"><br><br>
                     
-                    <label for="segment">Segmento:</label>
-                    <select id="segment">
-                        <option value="cluster1">Frio / FER / TRAD</option>
-                        <option value="cluster2">Sub / Top Volume / Noturno</option>
-                        <option value="cluster3">Vip / LC</option>
-                        <option value="cluster4">ASrota / Hiperseg</option>
-                        <option value="cluster5">Sup Contas / RNC</option>
-                    </select><br><br>
-                    
-                    <label for="isWeekday">Dia da semana ou sábado?</label>
-                    <select id="isWeekday">
+                    <label for="diaSemana">Dia da semana ou sábado?</label>
+                    <select id="diaSemana">
                         <option value="true">Dia da semana</option>
                         <option value="false">Sábado</option>
                     </select><br><br>
                     
-                    <label for="totalVisits">Quantidade total de visitas:</label>
-                    <input type="number" id="totalVisits" required><br><br>
+                    <label for="totalVisitas">Quantidade total de visitas:</label>
+                    <input type="number" id="totalVisitas" placeholder="Insira a quantidade de visitas"><br><br>
                     
-                    <label for="minRotaVisits">Quantidade de PDVs com Rota Mínima (opcional):</label>
-                    <input type="number" id="minRotaVisits"><br><br>
+                    <label for="visitasMinimas">Quantidade de PDVs com visita de 2 minutos (opcional):</label>
+                    <input type="number" id="visitasMinimas" placeholder="Insira da quantidade de PDVs com visita mínima (opcional)"><br><br>
                     
-                    <button type="button" onclick="calculateRE()">Calcular</button>
+                    <button type="button" onclick="calcularRE()">Calcular</button>
                 </form>
-    
-                <div id="result">
+            
+                <div id="resultado">
+                    <!-- Resultados serão exibidos aqui -->
+                </div>
 
             </section>
                
