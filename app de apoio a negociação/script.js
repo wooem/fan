@@ -1,3 +1,4 @@
+95% de armazenamento usado … Caso atinja o limite de armazenamento, não será possível criar, editar ou fazer upload de arquivos. Aproveite 100 GB de armazenamento por R$ 6,99 R$ 1,69 por mês, durante 3 meses.
 function calcularMargem() {
   const precoCompra = parseFloat(document.getElementById('precoCompra').value);
   const precoVendaUnitario = parseFloat(document.getElementById('precoVendaUnitario').value);
@@ -76,65 +77,33 @@ function calcularQuantidadeCaixas() {
   resultCaixas.innerHTML = `Quantidade de caixas: ${quantidadeCaixas}`;
 }
 
-function calculateRE() {
-  const rePercentage = parseFloat(document.getElementById("rePercentage").value);
-  const segment = document.getElementById("segment").value;
-  const isWeekday = document.getElementById("isWeekday").value === "true";
-  const totalVisits = parseInt(document.getElementById("totalVisits").value);
-  const minRotaVisits = parseInt(document.getElementById("minRotaVisits").value) || 0;
+function calcularRE() {
+  // Obter os valores dos elementos do formulário
+  const RE = parseFloat(document.getElementById("porcentagemRE").value);
+  const DiaSem = document.getElementById("diaSemana").value === "true";
+  const PDVs = parseInt(document.getElementById("totalVisitas").value);
+  const RotaMIN = parseInt(document.getElementById("visitasMinimas").value) || 0;
 
-  let maxVisitsPerSegment = 0;
-  let maxTimePerSegment = 0;
+  // Calcular o tempo necessário com base nos valores fornecidos
+  const tempoNecessario = DiaSem ? 280 * (RE / 100) : 168 * (RE / 100);
+  const tempoMedioPorVisita = tempoNecessario / PDVs;
+  const tempoMedioExcluindoRotaMinima = (tempoNecessario - 2 * RotaMIN) / (PDVs - RotaMIN);
 
-  switch (segment) {
-    case "cluster1":
-      maxTimePerSegment = 15;
-      break;
-    case "cluster2":
-      maxTimePerSegment = 20;
-      break;
-    case "cluster3":
-      maxTimePerSegment = 25;
-      break;
-    case "cluster4":
-      maxTimePerSegment = 30;
-      break;
-    case "cluster5":
-      maxTimePerSegment = 60;
-      break;
-    default:
-      break;
-  }
+  // Obter o elemento onde exibiremos o resultado
+  const resultado = document.getElementById("resultado");
 
-  if (isWeekday) {
-    maxVisitsPerSegment = Math.floor(280 / maxTimePerSegment);
-  } else {
-    maxVisitsPerSegment = Math.floor(168 / maxTimePerSegment);
-  }
+  // Atualizar o HTML do elemento resultado com mensagens claras
 
-  const maxTimeTotal = maxVisitsPerSegment * maxTimePerSegment;
-
-  const remainingVisits = totalVisits - minRotaVisits;
-  const remainingTime = maxTimeTotal - minRotaVisits * 2; // Assuming 2 minutes per visit for Rota Mínima
-
-  const reAchieved = ((maxTimeTotal - minRotaVisits * 2) / maxTimeTotal) * 100;
-
-  const averageTimePerVisit = remainingTime / remainingVisits;
-  const formattedAverageTimePerVisit = formatMinutesToTime(averageTimePerVisit);
-
-  const resultDiv = document.getElementById("result");
-  resultDiv.innerHTML = `
-    <div style="background-color: #00BFFF; padding: 10px; margin-bottom: 10px;">
-      <p>Quantidade de PDVs para ${rePercentage}% de RE com tempo máximo de ${maxTimePerSegment} minutos: ${Math.min(maxVisitsPerSegment, totalVisits)} PDVs</p>
-    </div>
-    <div style="background-color: #87CEFA; padding: 10px; margin-bottom: 10px;">
-      <p>Quantidade média de tempo por visita para ${rePercentage}% de RE: ${formattedAverageTimePerVisit}</p>
-    </div>
-    <div style="background-color: #87CEEB; padding: 10px; margin-bottom: 10px;">
-      <p>Quantidade de PDVs com visita de 2 minutos (Rota Mínima): ${minRotaVisits} PDVs</p>
-      <p>Quantidade média de tempo por visita dos demais PDVs: ${formatMinutesToTime(averageTimePerVisit - 2)}</p>
-    </div>
-  `;
+  resultado.innerHTML = `
+  <div style="background-color: #00BFFF; padding: 10px; margin-bottom: 10px;">
+    <p style="color: black;">Calculadora de Rota Efetiva</p>
+    <p style="color: black;">Tempo médio por visita: ${tempoMedioPorVisita.toFixed(2)} minutos</p>
+  </div>
+  <div style="background-color: #87CEEB; padding: 10px; margin-bottom: 10px;">
+    <p>Quantidade de PDVs com visitas de tempo mínimo: ${RotaMIN} PDVs</p>
+    <p>Tempo médio por visita excluindo PDVs de tempo mínimo: ${tempoMedioExcluindoRotaMinima.toFixed(2)} minutos</p>
+  </div>
+`;
 }
 
 
